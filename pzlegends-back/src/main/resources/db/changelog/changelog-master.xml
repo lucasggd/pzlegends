@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="01" author="lucas.dias">
+        <createTable tableName="user">
+
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="username" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="email" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="user_type" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="avatar" type="LONGBLOB"/>
+
+            <column name="status" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="twitch" type="VARCHAR(100)"/>
+
+            <column name="youtube" type="VARCHAR(100)"/>
+        </createTable>
+
+        <insert tableName="user">
+            <column name="username" value="lucao"/>
+            <column name="email" value=""/>
+            <column name="user_type" valueNumeric="1"/>
+            <column name="status" valueNumeric="1"/>
+        </insert>
+
+        <createIndex tableName="user" indexName="user_username_index" unique="true">
+            <column name="username"/>
+        </createIndex>
+
+        <createTable tableName="user_password">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="CHAR(32)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <insert tableName="user_password">
+            <column name="user_id" valueNumeric="1"/>
+            <column name="password" value="1308dfed71297a652cc42a390e211489"/>
+        </insert>
+
+        <addForeignKeyConstraint baseTableName="user_password" baseColumnNames="user_id" constraintName="user_user_password_fk"
+                                 referencedTableName="user"
+                                 referencedColumnNames="id"/>
+
+        <createIndex tableName="user_password" indexName="user_password_index" unique="true">
+            <column name="user_id"/>
+        </createIndex>
+    </changeSet>
+    
+    <changeSet id="02" author="lucas.dias">
+        <createTable tableName="category">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rules" type="VARCHAR(5000)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    
+    <changeSet id="03" author="lucas.dias">
+        <createTable tableName="run">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="category_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="years" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="months" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="days" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="kills" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="video_url" type="VARCHAR(1000)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createIndex tableName="run" indexName="user_category_index" unique="true">
+            <column name="user_id"/>
+            <column name="category_id"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseTableName="run" baseColumnNames="user_id" constraintName="user_fk"
+                                 referencedTableName="user"
+                                 referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint baseTableName="run" baseColumnNames="category_id" constraintName="category_fk"
+                                 referencedTableName="category"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="04" author="lucas.dias">
+        <createTable tableName="run_request">
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="category_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="video_url" type="VARCHAR(1000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="years" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="months" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="days" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="kills" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="response_by" type="bigint">
+            </column>
+            <column name="response_at" type="DATETIME">
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="run_request" baseColumnNames="user_id" constraintName="run_request_user_fk"
+                                 referencedTableName="user"
+                                 referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint baseTableName="run_request" baseColumnNames="category_id" constraintName="run_request_category_fk"
+                                 referencedTableName="category"
+                                 referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint baseTableName="run_request" baseColumnNames="response_by" constraintName="run_request_response_by_fk"
+                                 referencedTableName="user"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="05" author="lucas.dias">
+        <createTable tableName="run_report">
+
+            <column name="id" autoIncrement="true" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="run_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="report_by" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="message" type="varchar(500)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="status" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="response_by" type="bigint">
+            </column>
+
+            <column name="response_at" type="DATETIME">
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="run_report" baseColumnNames="run_id"
+                                 constraintName="run_report_run_id_fk"
+                                 referencedTableName="run"
+                                 referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint baseTableName="run_report" baseColumnNames="report_by"
+                                 constraintName="run_report_report_by_fk"
+                                 referencedTableName="user"
+                                 referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint baseTableName="run_report" baseColumnNames="response_by" constraintName="run_report_response_by_fk"
+                                 referencedTableName="user"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

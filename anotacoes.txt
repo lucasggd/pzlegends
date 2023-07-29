@@ -1,0 +1,20 @@
+Base do projeto =================
+
+✅ Adicionar userIcon (opcional).
+✅ Adicionar user status (active, not_confirmed, deleted, banned).
+✅ Adicionar redes sociais do usuario (opcional).
+
+Navbar mudar o selecionado.
+Criar mecanismo de regras da categoria.
+Concluir o contato.
+Criar tela de perfil de usuario.
+Criação de conta com confirmação de email.
+Tela de doação.
+
+Avançado ==========================
+
+Aparecer quem aprovou a run.
+Sistema de notificações.
+Area de admin
+Tela para ver run request e dar veredito.
+Tela para ver os reports e dar veredito.

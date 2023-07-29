@@ -1,0 +1,107 @@
+<div class="w-full h-full flex justify-center overflow-auto">
+    <div class="w-3/4 h-full block py-6">
+
+        <div class="w-full h-auto bg-black/10 rounded-md shadow-xl mb-16">
+            <!-- TOP 3 -->
+            <section class="flex flex-row justify-center pb-32">
+
+                <div class="h-80 w-64 bg-gray-600 mx-10 rounded-md shadow-xl flex flex-col items-center pt-5 cursor-pointer"
+                    (click)="selectRun(top3Players[1].id)">
+                    <!-- Icon -->
+                    <div class="w-32 h-32 bg-black/50 rounded-full border border-black"></div>
+
+                    <!-- Info -->
+                    <div
+                        class="h-48 flex flex-col text-center text-md font-sans text-xl font-normal text-white justify-evenly">
+                        <!-- username -->
+                        <span class="font-bold py-5">{{top3Players[1].username}}</span>
+
+                        <div class="flex flex-col h-full justify-evenly">
+                            <!-- days -->
+                            <span>{{top3Players[1].years}} anos, {{top3Players[1].months}} meses,
+                                {{top3Players[1].days}}
+                                dias</span>
+
+                            <!-- kills -->
+                            <span>{{top3Players[1].kills}} kills</span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="h-96 w-80 bg-yellow-500 mx-10 rounded-md shadow-xl flex flex-col items-center pt-5 cursor-pointer"
+                    (click)="selectRun(top3Players[0].id)">
+
+                    <!-- Icon -->
+                    <div class="w-32 h-32 bg-black/50 rounded-full border border-black"></div>
+
+                    <!-- Info -->
+                    <div
+                        class="h-48 flex flex-col text-center text-md font-sans text-xl font-normal text-white justify-evenly">
+                        <!-- username -->
+                        <span class="font-bold py-5">{{top3Players[0].username}}</span>
+
+                        <div class="flex flex-col h-full justify-evenly">
+                            <!-- days -->
+                            <span>{{top3Players[0].years}} anos, {{top3Players[0].months}} meses,
+                                {{top3Players[0].days}}
+                                dias</span>
+
+                            <!-- kills -->
+                            <span>{{top3Players[0].kills}} kills</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="h-80 w-64 bg-yellow-900 mx-10 rounded-md shadow-xl flex flex-col items-center pt-5 cursor-pointer"
+                    (click)="selectRun(top3Players[2].id)">
+                    <!-- Icon -->
+                    <div class="w-32 h-32 bg-black/50 rounded-full border border-black"></div>
+
+                    <!-- Info -->
+                    <div
+                        class="h-48 flex flex-col text-center text-md font-sans text-xl font-normal text-white justify-evenly">
+                        <!-- username -->
+                        <span class="font-bold py-5">{{top3Players[2].username}}</span>
+
+                        <div class="flex flex-col h-full justify-evenly">
+                            <!-- days -->
+                            <span>{{top3Players[2].years}} anos, {{top3Players[2].months}} meses,
+                                {{top3Players[2].days}}
+                                dias</span>
+
+                            <!-- kills -->
+                            <span>{{top3Players[2].kills}} kills</span>
+                        </div>
+
+                    </div>
+                </div>
+
+            </section>
+
+            <section>
+                <div *ngFor="let p of topPlayers; let i = index"
+                    class="w-full h-20 px-10 flex items-center justify-between text-center text-md font-sans text-xl font-normal text-white cursor-pointer"
+                    [ngClass]="{'bg-black/20' : i % 2 === 0}" (click)="selectRun(p.id)">
+                    <div class="flex items-center">
+                        <span class="font-bold pr-10">#{{i+2}}</span>
+                        <div class="w-16 h-16 bg-black/50 rounded-full border border-black"></div>
+                        <span class="font-bold pl-10">{{p.username}}</span>
+                    </div>
+
+                    <div class="flex h-full items-center">
+                        <!-- days -->
+                        <span class="px-4">{{p.years}} anos, {{p.months}} meses, {{p.days}} dias</span>
+
+                        <!-- kills -->
+                        <span class="px-4">{{p.kills}} kills</span>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+        <div class="h-0.5"></div>
+    </div>
+</div>
