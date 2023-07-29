@@ -5,6 +5,11 @@
             <!-- TOP 3 -->
             <section class="flex xl:flex-row flex-col justify-center pb-32">
 
+                <h2 *ngIf="!top3Players[0]"
+                    class="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">Sem
+                    competidores nesta categoria
+                </h2>
+
                 <div *ngIf="top3Players[1]"
                     class="bg-gray-600 xl:h-80 w-full xl:w-64 flex xl:flex-col xl:mx-10 rounded-md shadow-xl items-center pt-5 c pl-4 xl:pl-0ursor-pointer"
                     (click)="selectRun(top3Players[1].id)">
