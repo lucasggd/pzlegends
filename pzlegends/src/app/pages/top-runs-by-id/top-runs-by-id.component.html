@@ -15,10 +15,14 @@
                 class="mt-10 w-[30rem] h-[15rem] lg:w-[40rem] lg:h-[20rem] xl:w-[50rem] xl:h-[25rem] 2xl:w-[60rem] 2xl:h-[30rem]"
                 src="https://player.twitch.tv/?video=1877415177&parent=https://www.speedrun.com" frameborder="0"
                 allowfullscreen="true" scrolling="no"></iframe>
+            <!--             <iframe
+                class="mt-10 w-[30rem] h-[15rem] lg:w-[40rem] lg:h-[20rem] xl:w-[50rem] xl:h-[25rem] 2xl:w-[60rem] 2xl:h-[30rem]"
+                src="{{ run.videoUrl}}&parent=https://www.speedrun.com" frameborder="0" allowfullscreen="true"
+                scrolling="no"></iframe> -->
             <div class="w-[30rem] lg:w-[40rem] xl:w-[50rem] 2xl:w-[60rem] h-auto mt-2 flex items-center">
                 <div class="flex flex-col items-center">
                     <div class="w-32 h-32 bg-black/50 rounded-full border border-black mx-10 my-4"></div>
-                    <span class="font-bold text-white text-xl">Lucasggd</span>
+                    <span *ngIf="run && run.user" class="font-bold text-white text-xl">{{ run.user.username }}</span>
 
                     <div class="flex justify-center items-center mt-5">
                         <img class="w-6 h-6 mx-1 cursor-pointer" src="../../../assets/icons/twitch.png" alt="twitch">
@@ -30,10 +34,11 @@
                         <span>Estatísticas</span>
                         <br />
                         <!-- days -->
-                        <span>Tempo vivo: <span class="font-bold"> 3 anos, 12 meses, 25 dias</span> </span>
+                        <span>Tempo vivo: <span class="font-bold"> {{run.years}} anos, {{run.months}} meses,
+                                {{run.days}} dias</span> </span>
 
                         <!-- kills -->
-                        <span>Zumbis mortos: <span class="font-bold">240.374 kills</span></span>
+                        <span>Zumbis mortos: <span class="font-bold">{{run.kills}} kills</span></span>
                     </div>
 
                 </div>

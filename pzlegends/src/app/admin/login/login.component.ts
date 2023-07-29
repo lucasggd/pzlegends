@@ -16,7 +16,7 @@ export class LoginComponent {
   })
 
   constructor(private _userService: UserService, private _router: Router) {
-    if (_userService.isAuthenticated()) this._router.navigateByUrl('home');
+    if (_userService.isAuthenticated()) this._router.navigate(['/home']);
   }
 
   login(): void {

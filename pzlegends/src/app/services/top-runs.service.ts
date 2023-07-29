@@ -13,4 +13,9 @@ export class TopRunsService {
     return this._http.get<any>(`http://localhost:8080/category/${id}/runs`)
   }
 
+  getRun(id: number): Observable<any> {
+    return this._http.get<any>(`http://localhost:8080/run/${id}`)
+  }
+
+
 }

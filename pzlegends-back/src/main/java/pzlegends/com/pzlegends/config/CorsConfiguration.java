@@ -29,5 +29,6 @@ public class CorsConfiguration implements WebMvcConfigurer {
         ir.excludePathPatterns("/authenticate");
         ir.excludePathPatterns("/category");
         ir.excludePathPatterns("/category/{id}/runs");
+        ir.excludePathPatterns("/run/{id}");
     }
 }

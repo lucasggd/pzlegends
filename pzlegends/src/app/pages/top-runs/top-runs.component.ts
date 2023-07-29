@@ -17,7 +17,6 @@ export class TopRunsComponent {
   public topPlayers: any[] = []
 
   constructor(private _router: Router, private _activatedRoute: ActivatedRoute, private _topRunsService: TopRunsService) {
-
   }
 
   ngOnInit(): void {
@@ -28,6 +27,9 @@ export class TopRunsComponent {
   }
 
   getRuns(): void {
+    this.top3Players = [];
+    this.topPlayers = [];
+
     this._topRunsService.getTopRuns(this._id).pipe(take(1)).subscribe({
       next: (data) => {
         let i = 0;
@@ -44,7 +46,7 @@ export class TopRunsComponent {
   }
 
   selectRun(id: number) {
-    this._router.navigateByUrl('run/' + id);
+    this._router.navigateByUrl('/run/' + id);
   }
 
 }
