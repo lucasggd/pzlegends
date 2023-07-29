@@ -17,11 +17,7 @@ export class LoginComponent {
   constructor(private _userService: UserService) { }
 
   login(): void {
-    this._userService.login(this.form.get('username')?.value!, this.form.get('password')?.value!).subscribe({
-      next: (d: any) => {
-        localStorage.setItem('t', d.t)
-      }
-    })
+    this._userService.login(this.form.get('username')?.value!, this.form.get('password')?.value!)
   }
 
 }
