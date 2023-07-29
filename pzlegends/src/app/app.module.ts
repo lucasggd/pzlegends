@@ -14,6 +14,9 @@ import { NavbarModule } from './layout/navbar/navbar.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoginModule } from './admin/login/login.module';
 import { AuthInterceptor } from './admin/interceptor/auth.interceptor';
+import { SendRunModule } from './pages/send-run/send-run.module';
+import { HomeModule } from './pages/home/home.module';
+import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -32,10 +35,14 @@ import { AuthInterceptor } from './admin/interceptor/auth.interceptor';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService,
     TopRunsModule,
     TopRunsByIdModule,
     ContactModule,
     LoginModule,
+    SendRunModule,
+    HomeModule
   ],
   bootstrap: [AppComponent]
 })

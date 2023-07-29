@@ -2,11 +2,12 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Observable, tap } from "rxjs";
+import { UserService } from "src/app/services/user.service";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private router: Router) { }
+  constructor(private _router: Router, private _userService: UserService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const user = JSON.parse(localStorage.getItem('user')!);
@@ -25,7 +26,8 @@ export class AuthInterceptor implements HttpInterceptor {
           if (err.status !== 401) {
             return;
           }
-          this.router.navigate(['login']);
+          this._userService.logout();
+          this._router.navigate(['login']);
         }
       }));
   }

@@ -1,16 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, take } from 'rxjs';
-import { Enviroment } from 'src/enviroment';
+import { take } from 'rxjs';
 import { Login } from '../model/login';
 import { User } from '../model/user';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private _http: HttpClient) { }
+  constructor(private _router: Router, private _http: HttpClient, private jwtHelper: JwtHelperService) { }
 
   get user(): User {
     return JSON.parse(localStorage.getItem('user')!);
@@ -36,8 +37,22 @@ export class UserService {
         user.t = d.t;
 
         this.user = user;
+
+        window.location.reload();
       }
     })
+  }
+
+  logout(): void {
+    localStorage.removeItem('user');
+    window.location.reload();
+  }
+
+  isAuthenticated(): boolean {
+    if (!this.user || !this.user.t || this.jwtHelper.isTokenExpired(this.user.t)) {
+      return false;
+    }
+    return true;
   }
 
   private decodeJwt(token: string) {

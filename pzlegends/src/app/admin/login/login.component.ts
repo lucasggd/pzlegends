@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -14,7 +15,9 @@ export class LoginComponent {
     password: new FormControl(null, Validators.required),
   })
 
-  constructor(private _userService: UserService) { }
+  constructor(private _userService: UserService, private _router: Router) {
+    if (_userService.isAuthenticated()) this._router.navigateByUrl('home');
+  }
 
   login(): void {
     this._userService.login(this.form.get('username')?.value!, this.form.get('password')?.value!)
