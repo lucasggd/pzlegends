@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { take } from 'rxjs';
 import { TopRunsService } from 'src/app/services/top-runs.service';
+import { RulesDialogComponent } from './rules-dialog/rules-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-top-runs',
@@ -16,7 +18,7 @@ export class TopRunsComponent {
 
   public topPlayers: any[] = []
 
-  constructor(private _router: Router, private _activatedRoute: ActivatedRoute, private _topRunsService: TopRunsService) {
+  constructor(private _router: Router, private _activatedRoute: ActivatedRoute, private _topRunsService: TopRunsService, private _dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -48,5 +50,14 @@ export class TopRunsComponent {
   selectRun(id: number) {
     this._router.navigateByUrl('/run/' + id);
   }
+
+  openDialog() {
+    this._dialog.open(RulesDialogComponent, {
+      width: '70rem',
+      height: 'auto',
+      panelClass: 'custom-modalbox',
+    });
+  }
+
 
 }
