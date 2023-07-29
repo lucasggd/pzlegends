@@ -10,6 +10,10 @@ import { TopRunsModule } from './pages/top-runs/top-runs.module';
 import { TopRunsByIdModule } from './pages/top-runs-by-id/top-runs-by-id.module';
 import { ContactModule } from './pages/contact/contact.module';
 import { MatDialogModule } from '@angular/material/dialog';
+import { NavbarModule } from './layout/navbar/navbar.module';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { LoginModule } from './admin/login/login.module';
+import { AuthInterceptor } from './admin/interceptor/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -22,12 +26,16 @@ import { MatDialogModule } from '@angular/material/dialog';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    MatDialogModule
+    MatDialogModule,
+    NavbarModule,
+    HttpClientModule
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     TopRunsModule,
     TopRunsByIdModule,
-    ContactModule
+    ContactModule,
+    LoginModule,
   ],
   bootstrap: [AppComponent]
 })
