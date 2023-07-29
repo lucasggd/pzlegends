@@ -4,6 +4,7 @@ import { TopRunsByIdComponent } from './top-runs-by-id.component';
 import { ReportDialogComponent } from './report-dialog/report-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -15,7 +16,8 @@ import { BrowserModule } from '@angular/platform-browser';
   imports: [
     BrowserModule,
     CommonModule,
-    MatDialogModule
+    MatDialogModule,
+    ReactiveFormsModule
   ]
 })
 export class TopRunsByIdModule { }

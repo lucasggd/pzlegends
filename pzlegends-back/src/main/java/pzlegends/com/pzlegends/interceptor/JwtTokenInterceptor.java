@@ -8,6 +8,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 @Component
@@ -33,5 +35,13 @@ public class JwtTokenInterceptor implements HandlerInterceptor {
             response.sendError(HttpStatus.UNAUTHORIZED.value(), "Missing token");
             return false;
         }
+    }
+
+    public static Long getUserId() {
+
+        String token = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest().getHeader("Authorization").substring(7);
+        Claims claims = Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
+
+        return Long.parseLong(claims.get("id").toString());
     }
 }

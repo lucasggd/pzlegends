@@ -15,7 +15,6 @@ import pzlegends.com.pzlegends.model.User;
 public class RunReportDTO {
 
     private Long runId;
-    private Long reportBy;
     private String message;
 
 }
