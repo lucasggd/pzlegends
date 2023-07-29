@@ -42,7 +42,8 @@ import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
     ContactModule,
     LoginModule,
     SendRunModule,
-    HomeModule
+    HomeModule,
+    NavbarModule
   ],
   bootstrap: [AppComponent]
 })

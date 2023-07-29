@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { take } from 'rxjs';
+import { Category } from 'src/app/model/category';
 import { User } from 'src/app/model/user';
+import { CategoryService } from 'src/app/services/category.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -13,7 +16,11 @@ export class NavbarComponent {
 
   public user!: User;
 
-  constructor(private _userService: UserService) { }
+  public categories: Category[] = [];
+
+  constructor(private _userService: UserService, private _categoryService: CategoryService) {
+    this.getCategories();
+  }
 
   ngOnInit(): void {
     this.authenticated = this._userService.isAuthenticated();
@@ -24,6 +31,14 @@ export class NavbarComponent {
 
   logout(): void {
     this._userService.logout();
+  }
+
+  getCategories(): void {
+    this._categoryService.getAllCategories().pipe(take(1)).subscribe({
+      next: (d) => {
+        this.categories = d
+      }
+    });
   }
 
 }

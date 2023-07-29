@@ -11,7 +11,7 @@ import { SendRunComponent } from './pages/send-run/send-run.component';
 import { AuthGuard } from './admin/guard/auth.guard';
 
 const routes: Routes = [
-  { path: 'runs', component: TopRunsComponent },
+  { path: 'runs/:id', component: TopRunsComponent },
   { path: 'run/:id', component: TopRunsByIdComponent },
   { path: 'send-run', component: SendRunComponent, canActivate: [AuthGuard] },
   { path: 'contact', component: ContactComponent },

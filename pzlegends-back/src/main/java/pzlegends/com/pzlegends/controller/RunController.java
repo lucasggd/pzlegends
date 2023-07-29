@@ -1,6 +1,7 @@
 package pzlegends.com.pzlegends.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,7 @@ public class RunController {
 
     @GetMapping("{id}")
     public ResponseEntity<?> findById(@PathVariable Long id) {
-        return ResponseEntity.ok(runService.findById(id));
+        return new ResponseEntity<>(runService.findById(id), HttpStatus.OK);
     }
 
 }

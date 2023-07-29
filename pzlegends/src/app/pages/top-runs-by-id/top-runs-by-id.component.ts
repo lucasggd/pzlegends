@@ -10,18 +10,11 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class TopRunsByIdComponent {
 
-  private _selectedId!: number;
+  private _id!: number;
 
-  constructor(private _route: ActivatedRoute, private _dialog: MatDialog) {
+  constructor(private _activatedRoute: ActivatedRoute, private _dialog: MatDialog) {
+    let _id = this._activatedRoute.snapshot.params['id'];
 
-  }
-
-  ngOnInit() {
-    /* this._route.paramMap.pipe(
-      switchMap(params => {
-        this._selectedId = Number(params.get('id'));
-      })
-    ); */
   }
 
   openDialog() {

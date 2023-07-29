@@ -3,33 +3,35 @@
 
         <div class="w-full h-auto bg-black/10 rounded-md shadow-xl mb-16">
             <!-- TOP 3 -->
-            <section class="flex flex-row justify-center pb-32">
+            <section class="flex xl:flex-row flex-col justify-center pb-32">
 
-                <div class="h-80 w-64 bg-gray-600 mx-10 rounded-md shadow-xl flex flex-col items-center pt-5 cursor-pointer"
+                <div *ngIf="top3Players[1]"
+                    class="bg-gray-600 xl:h-80 w-full xl:w-64 flex xl:flex-col xl:mx-10 rounded-md shadow-xl items-center pt-5 c pl-4 xl:pl-0ursor-pointer"
                     (click)="selectRun(top3Players[1].id)">
                     <!-- Icon -->
                     <div class="w-32 h-32 bg-black/50 rounded-full border border-black"></div>
 
                     <!-- Info -->
                     <div
-                        class="h-48 flex flex-col text-center text-md font-sans text-xl font-normal text-white justify-evenly">
+                        class="h-48 flex xl:flex-col items-center text-center text-md font-sans text-xl font-normal text-white xl:justify-evenly xl:order-2">
                         <!-- username -->
-                        <span class="font-bold py-5">{{top3Players[1].username}}</span>
+                        <span class="font-bold py-5 px-5 xl:px-0">{{top3Players[1].user.username}}</span>
 
-                        <div class="flex flex-col h-full justify-evenly">
+                        <div class="flex xl:flex-col h-full justify-evenly items-center">
                             <!-- days -->
-                            <span>{{top3Players[1].years}} anos, {{top3Players[1].months}} meses,
+                            <span class=" px-5 xl:px-0">{{top3Players[1].years}} anos, {{top3Players[1].months}} meses,
                                 {{top3Players[1].days}}
                                 dias</span>
 
                             <!-- kills -->
-                            <span>{{top3Players[1].kills}} kills</span>
+                            <span class=" px-5 xl:px-0">{{top3Players[1].kills}} kills</span>
                         </div>
 
                     </div>
                 </div>
 
-                <div class="h-96 w-80 bg-yellow-500 mx-10 rounded-md shadow-xl flex flex-col items-center pt-5 cursor-pointer"
+                <div *ngIf="top3Players[0]"
+                    class="bg-yellow-500 xl:h-80 w-full xl:w-64 flex xl:flex-col bg-gray-600 xl:mx-10 rounded-md shadow-xl items-center pt-5 pl-4 xl:pl-0 cursor-pointer xl:order-1 order-first"
                     (click)="selectRun(top3Players[0].id)">
 
                     <!-- Icon -->
@@ -37,43 +39,44 @@
 
                     <!-- Info -->
                     <div
-                        class="h-48 flex flex-col text-center text-md font-sans text-xl font-normal text-white justify-evenly">
+                        class="h-48 flex xl:flex-col items-center text-center text-md font-sans text-xl font-normal text-white xl:justify-evenly">
                         <!-- username -->
-                        <span class="font-bold py-5">{{top3Players[0].username}}</span>
+                        <span class="font-bold py-5 px-5 xl:px-0">{{top3Players[0].user.username}}</span>
 
-                        <div class="flex flex-col h-full justify-evenly">
+                        <div class="flex xl:flex-col h-full justify-evenly items-center">
                             <!-- days -->
-                            <span>{{top3Players[0].years}} anos, {{top3Players[0].months}} meses,
+                            <span class=" px-5 xl:px-0">{{top3Players[0].years}} anos, {{top3Players[0].months}} meses,
                                 {{top3Players[0].days}}
                                 dias</span>
 
                             <!-- kills -->
-                            <span>{{top3Players[0].kills}} kills</span>
+                            <span class=" px-5 xl:px-0">{{top3Players[0].kills}} kills</span>
                         </div>
 
                     </div>
 
                 </div>
 
-                <div class="h-80 w-64 bg-yellow-900 mx-10 rounded-md shadow-xl flex flex-col items-center pt-5 cursor-pointer"
+                <div *ngIf="top3Players[2]"
+                    class="bg-yellow-900 xl:h-80 w-full xl:w-64 flex xl:flex-col xl:mx-10 rounded-md shadow-xl items-center pt-5 pl-4 xl:pl-0 cursor-pointer xl:order-3"
                     (click)="selectRun(top3Players[2].id)">
                     <!-- Icon -->
                     <div class="w-32 h-32 bg-black/50 rounded-full border border-black"></div>
 
                     <!-- Info -->
                     <div
-                        class="h-48 flex flex-col text-center text-md font-sans text-xl font-normal text-white justify-evenly">
+                        class="h-48 flex xl:flex-col items-center text-center text-md font-sans text-xl font-normal text-white xl:justify-evenly">
                         <!-- username -->
-                        <span class="font-bold py-5">{{top3Players[2].username}}</span>
+                        <span class="font-bold py-5 px-5 xl:px-0">{{top3Players[2].user.username}}</span>
 
-                        <div class="flex flex-col h-full justify-evenly">
+                        <div class="flex xl:flex-col h-full justify-evenly items-center">
                             <!-- days -->
-                            <span>{{top3Players[2].years}} anos, {{top3Players[2].months}} meses,
+                            <span class=" px-5 xl:px-0">{{top3Players[2].years}} anos, {{top3Players[2].months}} meses,
                                 {{top3Players[2].days}}
                                 dias</span>
 
                             <!-- kills -->
-                            <span>{{top3Players[2].kills}} kills</span>
+                            <span class=" px-5 xl:px-0">{{top3Players[2].kills}} kills</span>
                         </div>
 
                     </div>
@@ -86,9 +89,9 @@
                     class="w-full h-20 px-10 flex items-center justify-between text-center text-md font-sans text-xl font-normal text-white cursor-pointer"
                     [ngClass]="{'bg-black/20' : i % 2 === 0}" (click)="selectRun(p.id)">
                     <div class="flex items-center">
-                        <span class="font-bold pr-10">#{{i+2}}</span>
+                        <span class="font-bold pr-10">#{{i+4}}</span>
                         <div class="w-16 h-16 bg-black/50 rounded-full border border-black"></div>
-                        <span class="font-bold pl-10">{{p.username}}</span>
+                        <span class="font-bold pl-10">{{p.user.username}}</span>
                     </div>
 
                     <div class="flex h-full items-center">
