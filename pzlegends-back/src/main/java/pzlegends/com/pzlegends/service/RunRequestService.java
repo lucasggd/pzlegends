@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import pzlegends.com.pzlegends.config.ApiException;
+import pzlegends.com.pzlegends.interceptor.JwtTokenInterceptor;
 import pzlegends.com.pzlegends.model.Run;
 import pzlegends.com.pzlegends.model.RunRequest;
 import pzlegends.com.pzlegends.model.dto.RunDTO;
@@ -24,7 +25,7 @@ public class RunRequestService {
 
 
     public RunRequest newRequest(RunDTO runRequest) throws Exception {
-        var user = userService.findByUsername(runRequest.getUsername());
+        var user = userService.findById(JwtTokenInterceptor.getUserId());
 
         var x = runRequestRepository.findByUserIdAndCategoryIdAndRunRequestStatus(user.getId(), runRequest.getCategoryId(), RunRequestStatusEnum.PENDING);
 
