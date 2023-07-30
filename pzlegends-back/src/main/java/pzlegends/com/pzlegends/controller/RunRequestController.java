@@ -28,4 +28,8 @@ public class RunRequestController {
         return new ResponseEntity<>(runRequestService.newRequest(runRequest), HttpStatus.CREATED);
     }
 
+    @PostMapping("{id}/response")
+    private ResponseEntity<?> newRequest(@PathVariable("id") Long id, @RequestBody boolean bool) throws Exception {
+        return new ResponseEntity<>(runRequestService.response(id, bool), HttpStatus.CREATED);
+    }
 }

@@ -7,10 +7,12 @@ import pzlegends.com.pzlegends.config.ApiException;
 import pzlegends.com.pzlegends.interceptor.JwtTokenInterceptor;
 import pzlegends.com.pzlegends.model.Run;
 import pzlegends.com.pzlegends.model.RunRequest;
+import pzlegends.com.pzlegends.model.User;
 import pzlegends.com.pzlegends.model.dto.RunDTO;
 import pzlegends.com.pzlegends.model.enums.RunRequestStatusEnum;
 import pzlegends.com.pzlegends.repository.RunRequestRepository;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +27,9 @@ public class RunRequestService {
 
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    private RunService runService;
 
     public List<RunRequest> findAll(){
         return runRequestRepository.findAll();
@@ -50,5 +55,27 @@ public class RunRequestService {
                 runRequest.getKills());
 
         return runRequestRepository.save(run);
+    }
+
+    public RunRequest response(Long id, boolean bool){
+
+        var run = runRequestRepository.findById(id);
+
+        if (run.isEmpty()) throw new ApiException(HttpStatus.NOT_FOUND, "notFound");
+
+        run.get().setResponse_by(new User(JwtTokenInterceptor.getUserId()));
+        run.get().setResponse_at(new Date());
+
+        if (bool){
+            run.get().setRunRequestStatus(RunRequestStatusEnum.APPROVED);
+            runRequestRepository.save(run.get());
+            runService.newRun(new Run(run.get()));
+        }
+        else {
+            run.get().setRunRequestStatus(RunRequestStatusEnum.REFUSED);
+            runRequestRepository.save(run.get());
+        }
+
+        return run.get();
     }
 }

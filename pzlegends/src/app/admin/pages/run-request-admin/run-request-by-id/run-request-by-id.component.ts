@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { take } from 'rxjs';
+import { MessageService } from 'src/app/abstract/message.service';
 import { RunRequestService } from 'src/app/admin/services/run-request.service';
 
 @Component({
@@ -14,7 +15,7 @@ export class RunRequestByIdComponent {
 
   public request: any;
 
-  constructor(private _runRequestService: RunRequestService, private _activatedRoute: ActivatedRoute, private _router: Router) {
+  constructor(private _runRequestService: RunRequestService, private _messageService: MessageService, private _activatedRoute: ActivatedRoute, private _router: Router) {
   }
 
   ngOnInit(): void {
@@ -32,14 +33,15 @@ export class RunRequestByIdComponent {
     })
   }
 
-  approve(): void {
-    //approve logic
-    this._router.navigate(['admin/run-request'])
-  }
-
-  refuse(): void {
-    //refuse logic
-    this._router.navigate(['admin/run-request'])
+  response(bool: boolean): void {
+    this._runRequestService.response(this._id, bool).pipe(take(1)).subscribe({
+      next: d => {
+        this._router.navigate(['admin/run-request'])
+      },
+      error: err => {
+        this._messageService.errorMessage(err.error.message);
+      }
+    })
   }
 
 }

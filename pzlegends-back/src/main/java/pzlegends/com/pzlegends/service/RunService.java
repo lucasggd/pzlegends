@@ -21,4 +21,8 @@ public class RunService {
     public Optional<Run> findById(Long id) {
         return runRepository.findById(id);
     }
+
+    public Run newRun(Run run) {
+        return runRepository.save(run);
+    }
 }

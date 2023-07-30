@@ -46,4 +46,15 @@ public class Run {
     public Run(Long id) {
         this.id = id;
     }
+
+    public Run(RunRequest runRequest) {
+        this.user = runRequest.getUser();
+        this.category = runRequest.getCategory();
+        this.videoUrl = runRequest.getVideoUrl();
+        this.years = runRequest.getYears();
+        this.months = runRequest.getMonths();
+        this.days = runRequest.getDays();
+        this.kills = runRequest.getKills();
+    }
+
 }

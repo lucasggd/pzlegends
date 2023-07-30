@@ -16,4 +16,8 @@ export class RunRequestService {
   getById(id: number): Observable<any> {
     return this._http.get<any>(`http://localhost:8080/run/request/${id}`)
   }
+
+  response(id: number, bool: boolean): Observable<any> {
+    return this._http.post<any>(`http://localhost:8080/run/request/${id}/response`, bool)
+  }
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UserService } from './services/user.service';
 import { UserTypeEnum } from './enum/userTypeEnum';
+import { User } from './model/user';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,7 @@ export class AppComponent {
   userTypeEnum = UserTypeEnum;
 
   constructor(private _userService: UserService) {
-    if (_userService.isTokenExpired()) _userService.logout();
+    if (_userService.isTokenExpired()) _userService.user = new User();
     this.userType = _userService.userType;
   }
 }

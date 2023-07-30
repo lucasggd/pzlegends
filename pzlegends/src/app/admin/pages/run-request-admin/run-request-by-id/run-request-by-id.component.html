@@ -53,12 +53,12 @@
                 </div>
             </div>
             <div class="w-full flex justify-center items-center">
-                <button (click)="approve()"
+                <button type="button" (click)="response(true)"
                     class="inline-flex items-center mx-2 px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-green-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-green-800">
                     Aprovar
                 </button>
 
-                <button (click)="refuse()"
+                <button type="button" (click)="response(false)"
                     class="inline-flex items-center mx-2 px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-red-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-red-900">
                     Reprovar
                 </button>

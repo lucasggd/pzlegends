@@ -19,10 +19,10 @@ export class SendRunComponent {
 
   form = new FormGroup({
     videoUrl: new FormControl(null, Validators.required),
-    kills: new FormControl(null, Validators.required),
-    years: new FormControl(null, Validators.required),
-    months: new FormControl(null, Validators.required),
-    days: new FormControl(null, Validators.required),
+    kills: new FormControl(null, [Validators.required, Validators.min(0)]),
+    years: new FormControl(null, [Validators.required, Validators.min(0)]),
+    months: new FormControl(null, [Validators.required, Validators.min(0), Validators.max(12)]),
+    days: new FormControl(null, [Validators.required, Validators.min(0), Validators.max(31)]),
     categoryId: new FormControl(null, Validators.required)
   })
 
@@ -32,6 +32,20 @@ export class SendRunComponent {
         this.categories = d;
       }
     })
+  }
+
+  getErrorMessage(controlName: string) {
+    if (!this.form.get(controlName)?.touched) return;
+
+    if (this.form.get(controlName)?.hasError('min')) {
+      return 'Valor minimo é ' + this.form.get(controlName)?.getError('min')?.min;
+    }
+
+    if (this.form.get(controlName)?.hasError('max')) {
+      return 'Valor maximo é ' + this.form.get(controlName)?.getError('max')?.max;
+    }
+
+    return this.form.get(controlName)?.hasError('required') ? 'Campo obrigatório*' : '';
   }
 
   sendRun(): void {

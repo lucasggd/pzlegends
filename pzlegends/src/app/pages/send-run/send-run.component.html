@@ -1,5 +1,5 @@
-<section class="bg-white dark:bg-gray-900">
-    <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
+<section class="bg-white dark:bg-gray-900 max-h-full overflow-auto">
+    <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md overflow-auto">
         <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">Envie sua
             corrida
         </h2>
@@ -7,46 +7,51 @@
             a resposta de aprovação ou reprovação.</p>
         <form class="space-y-8" [formGroup]="form">
             <div>
-                <label class="block mb-2 pt-6 text-sm font-medium text-gray-900 dark:text-gray-300">Link do VOD (Link
+
+                <mat-label class="block mb-2 pt-6 text-sm font-medium text-gray-900 dark:text-gray-300">Link do VOD
+                    (Link
                     precisa
-                    ser publico)</label>
-                <input formControlName="videoUrl" type="text"
-                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
-                    placeholder="www.twitch.tv/video">
+                    ser publico)</mat-label>
+                <input matInput placeholder="www.twitch.tv/video" formControlName="videoUrl" required
+                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light">
+                <mat-error class="text-sm"
+                    *ngIf="form.get('videoUrl')?.errors">{{getErrorMessage('videoUrl')}}</mat-error>
 
-                <div>
-                    <label
-                        class="block mb-2 pt-6 text-sm font-medium text-gray-900 dark:text-gray-300">Categoria</label>
-                    <select formControlName="categoryId"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                        <option *ngFor="let c of categories" [value]="c?.id">{{c?.name}}</option>
-                    </select>
-                </div>
+                <mat-label
+                    class="block mb-2 pt-6 text-sm font-medium text-gray-900 dark:text-gray-300">Categoria</mat-label>
+                <select matInput formControlName="categoryId"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                    <option *ngFor="let c of categories" [value]="c?.id">{{c?.name}}</option>
+                </select>
+                <mat-error class="text-sm"
+                    *ngIf="form.get('categoryId')?.errors">{{getErrorMessage('categoryId')}}</mat-error>
 
+                <mat-label class="block mb-2 pt-6 text-sm font-medium text-gray-900 dark:text-gray-300">Anos
+                    vivos</mat-label>
+                <input matInput type="number" placeholder="10, 20..." formControlName="years" required
+                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light">
+                <mat-error class="text-sm" *ngIf="form.get('years')?.invalid">{{getErrorMessage('years')}}</mat-error>
 
-                <label class="block mb-2 pt-6 text-sm font-medium text-gray-900 dark:text-gray-300">Anos vivos</label>
-                <input formControlName="years" type="text"
-                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
-                    placeholder="10, 20...">
+                <mat-label class="block mb-2 pt-6 text-sm font-medium text-gray-900 dark:text-gray-300">Meses
+                    vivos</mat-label>
+                <input matInput type="number" placeholder="10, 20..." formControlName="months" required
+                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light">
+                <mat-error class="text-sm" *ngIf="form.get('months')?.invalid">{{getErrorMessage('months')}}</mat-error>
 
-                <label class="block mb-2 pt-6 text-sm font-medium text-gray-900 dark:text-gray-300">Meses vivos</label>
-                <input formControlName="months" type="text"
-                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
-                    placeholder="10, 20...">
+                <mat-label class="block mb-2 pt-6 text-sm font-medium text-gray-900 dark:text-gray-300">Dias
+                    vivos</mat-label>
+                <input matInput type="number" placeholder="10, 20..." formControlName="days" required
+                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light">
+                <mat-error class="text-sm" *ngIf="form.get('days')?.invalid">{{getErrorMessage('days')}}</mat-error>
 
-                <label class="block mb-2 pt-6 text-sm font-medium text-gray-900 dark:text-gray-300">Dias vivos</label>
-                <input formControlName="days" type="text"
-                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
-                    placeholder="10, 20...">
-
-                <label class="block mb-2 pt-6 text-sm font-medium text-gray-900 dark:text-gray-300">Zumbis
-                    Mortos</label>
-                <input formControlName="kills" type="text"
-                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
-                    placeholder="10, 20...">
+                <mat-label class="block mb-2 pt-6 text-sm font-medium text-gray-900 dark:text-gray-300">Zumbis mortos
+                </mat-label>
+                <input matInput type="number" placeholder="10, 20..." formControlName="kills" required
+                    class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light">
+                <mat-error class="text-sm" *ngIf="form.get('kills')?.invalid">{{getErrorMessage('kills')}}</mat-error>
             </div>
-            <button (click)="sendRun()"
-                class="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Enviar</button>
+            <button (click)="sendRun()" [disabled]="!form.valid"
+                class="py-3 px-5 disabled:text-gray-700 disabled:bg-gray-500 hover:disabled:bg-gray-500 text-sm font-medium text-center text-white rounded-lg bg-primary-700 sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Enviar</button>
         </form>
     </div>
 </section>
