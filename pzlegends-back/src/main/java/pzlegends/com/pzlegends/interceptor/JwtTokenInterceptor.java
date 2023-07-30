@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.HandlerInterceptor;
+import pzlegends.com.pzlegends.config.ApiException;
+import pzlegends.com.pzlegends.model.enums.UserTypeEnum;
 
 @Component
 public class JwtTokenInterceptor implements HandlerInterceptor {
@@ -25,6 +27,11 @@ public class JwtTokenInterceptor implements HandlerInterceptor {
             String token = authorizationHeader.substring(7);
             try {
                 Claims claims = Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
+
+                if (request.getRequestURL().toString().contains("/admin/")
+                        && !claims.get("userType").equals("ADMIN"))
+                    throw new ApiException(HttpStatus.UNAUTHORIZED, "");
+
                 request.setAttribute("claims", claims);
                 return true;
             } catch (JwtException e) {

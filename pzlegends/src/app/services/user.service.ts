@@ -50,7 +50,6 @@ export class UserService {
 
   logout(): void {
     localStorage.removeItem('user');
-    window.location.reload();
   }
 
   isAuthenticated(): boolean {

@@ -9,6 +9,8 @@ import pzlegends.com.pzlegends.model.RunReport;
 import pzlegends.com.pzlegends.model.dto.RunReportDTO;
 import pzlegends.com.pzlegends.repository.RunReportRepository;
 
+import java.util.List;
+
 @Service
 public class RunReportService {
 
@@ -18,5 +20,9 @@ public class RunReportService {
     public RunReport newReport(RunReportDTO runReport) {
         if (runReport.getRunId() == null || runReport.getMessage() == null) throw new ApiException(HttpStatus.CONFLICT, "dataIncomplete");
         return runReportRepository.save(new RunReport(runReport.getRunId(), JwtTokenInterceptor.getUserId(), runReport.getMessage()));
+    }
+
+    public List<RunReport> findAll() {
+        return runReportRepository.findAll();
     }
 }

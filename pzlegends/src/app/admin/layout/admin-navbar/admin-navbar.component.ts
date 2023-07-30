@@ -31,6 +31,7 @@ export class AdminNavbarComponent {
 
   logout(): void {
     this._userService.logout();
+    window.location.reload();
   }
 
   userProfile(): void {

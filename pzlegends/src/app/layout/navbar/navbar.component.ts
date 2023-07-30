@@ -32,6 +32,7 @@ export class NavbarComponent {
 
   logout(): void {
     this._userService.logout();
+    window.location.reload();
   }
 
   userProfile(): void {

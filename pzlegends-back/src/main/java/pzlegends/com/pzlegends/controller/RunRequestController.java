@@ -14,22 +14,10 @@ public class RunRequestController {
     @Autowired
     private RunRequestService runRequestService;
 
-    @GetMapping("")
-    private ResponseEntity<?> findAll() {
-        return new ResponseEntity<>(runRequestService.findAll(), HttpStatus.OK);
-    }
-
-    @GetMapping("{id}")
-    private ResponseEntity<?> findById(@PathVariable("id") Long id) {
-        return new ResponseEntity<>(runRequestService.findById(id), HttpStatus.OK);
-    }
     @PostMapping("")
     private ResponseEntity<?> newRequest(@RequestBody RunDTO runRequest) throws Exception {
         return new ResponseEntity<>(runRequestService.newRequest(runRequest), HttpStatus.CREATED);
     }
 
-    @PostMapping("{id}/response")
-    private ResponseEntity<?> newRequest(@PathVariable("id") Long id, @RequestBody boolean bool) throws Exception {
-        return new ResponseEntity<>(runRequestService.response(id, bool), HttpStatus.CREATED);
-    }
+
 }
