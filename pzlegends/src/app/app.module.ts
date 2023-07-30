@@ -17,6 +17,7 @@ import { AuthInterceptor } from './admin/interceptor/auth.interceptor';
 import { SendRunModule } from './pages/send-run/send-run.module';
 import { HomeModule } from './pages/home/home.module';
 import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
+import { UserProfileModule } from './pages/user-profile/user-profile.module';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
     LoginModule,
     SendRunModule,
     HomeModule,
-    NavbarModule
+    NavbarModule,
+    UserProfileModule
   ],
   bootstrap: [AppComponent]
 })

@@ -4,8 +4,8 @@ Base do projeto =================
 ✅ Adicionar user status (active, not_confirmed, deleted, banned).
 ✅ Adicionar redes sociais do usuario (opcional).
 
-Navbar mudar o selecionado.
-Criar mecanismo de regras da categoria.
+✅ Navbar mudar o selecionado.
+✅ Criar mecanismo de regras da categoria.
 Concluir o contato.
 Criar tela de perfil de usuario.
 Criação de conta com confirmação de email.
@@ -18,3 +18,8 @@ Sistema de notificações.
 Area de admin
 Tela para ver run request e dar veredito.
 Tela para ver os reports e dar veredito.
+
+
+
+teste
+asodk

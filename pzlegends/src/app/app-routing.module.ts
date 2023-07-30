@@ -9,6 +9,7 @@ import { RegisterComponent } from './admin/register/register.component';
 import { HomeComponent } from './pages/home/home.component';
 import { SendRunComponent } from './pages/send-run/send-run.component';
 import { AuthGuard } from './admin/guard/auth.guard';
+import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 
 const routes: Routes = [
   { path: 'runs/:id', component: TopRunsComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'user-profile', component: UserProfileComponent, canActivate: [AuthGuard] },
   { path: 'home', component: HomeComponent },
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: '**', pathMatch: 'full', redirectTo: 'home' },

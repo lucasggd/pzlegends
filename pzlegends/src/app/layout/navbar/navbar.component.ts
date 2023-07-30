@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { take } from 'rxjs';
 import { Category } from 'src/app/model/category';
 import { User } from 'src/app/model/user';
@@ -18,7 +19,7 @@ export class NavbarComponent {
 
   public categories: Category[] = [];
 
-  constructor(private _userService: UserService, private _categoryService: CategoryService) {
+  constructor(private _userService: UserService, private _categoryService: CategoryService, private _router: Router) {
     this.getCategories();
   }
 
@@ -31,6 +32,10 @@ export class NavbarComponent {
 
   logout(): void {
     this._userService.logout();
+  }
+
+  userProfile(): void {
+    this._router.navigate(['user-profile'])
   }
 
   getCategories(): void {
