@@ -53,9 +53,10 @@ export class TopRunsComponent {
 
   openDialog() {
     this._dialog.open(RulesDialogComponent, {
-      width: '70rem',
+      width: '50rem',
       height: 'auto',
       panelClass: 'custom-modalbox',
+      data: { id: this._id }
     });
   }
 

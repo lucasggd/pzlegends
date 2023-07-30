@@ -13,4 +13,8 @@ export class CategoryService {
   getAllCategories(): Observable<any> {
     return this._http.get<any>(`http://localhost:8080/category`)
   }
+
+  getCategory(id: number): Observable<any> {
+    return this._http.get<any>(`http://localhost:8080/category/${id}`)
+  }
 }
