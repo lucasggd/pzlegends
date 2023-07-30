@@ -60,6 +60,13 @@ export class UserService {
     return true;
   }
 
+  isTokenExpired(): boolean {
+    if (!this.user || !this.user.t) {
+      return false;
+    }
+    return this.jwtHelper.isTokenExpired(this.user.t)
+  }
+
   private decodeJwt(token: string) {
     var base64Payload = token.split(".")[1];
     var payload = decodeURIComponent(

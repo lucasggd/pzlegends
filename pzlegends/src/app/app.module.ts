@@ -19,8 +19,7 @@ import { HomeModule } from './pages/home/home.module';
 import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
 import { UserProfileModule } from './pages/user-profile/user-profile.module';
 import { AdminNavbarModule } from './admin/layout/admin-navbar/admin-navbar.module';
-import { MatTableModule } from '@angular/material/table';
-import { MatSortModule } from '@angular/material/sort';
+import { RunRequestAdminModule } from './admin/pages/run-request-admin/run-request-admin.module';
 
 @NgModule({
   declarations: [
@@ -37,13 +36,6 @@ import { MatSortModule } from '@angular/material/sort';
     NavbarModule,
     HttpClientModule,
     AdminNavbarModule,
-    MatSortModule,
-    MatTableModule,
-  ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
-    JwtHelperService,
     TopRunsModule,
     TopRunsByIdModule,
     ContactModule,
@@ -51,7 +43,13 @@ import { MatSortModule } from '@angular/material/sort';
     SendRunModule,
     HomeModule,
     NavbarModule,
-    UserProfileModule
+    UserProfileModule,
+    RunRequestAdminModule
+  ],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService,
   ],
   bootstrap: [AppComponent]
 })

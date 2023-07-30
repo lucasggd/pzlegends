@@ -13,6 +13,7 @@ export class AppComponent {
   userTypeEnum = UserTypeEnum;
 
   constructor(private _userService: UserService) {
+    if (_userService.isTokenExpired()) _userService.logout();
     this.userType = _userService.userType;
   }
 }

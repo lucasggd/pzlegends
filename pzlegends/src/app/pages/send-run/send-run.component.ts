@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { take } from 'rxjs';
+import { Category } from 'src/app/model/category';
 import { SendRun } from 'src/app/model/send-run';
+import { CategoryService } from 'src/app/services/category.service';
 import { SendRunService } from 'src/app/services/send-run.service';
 
 @Component({
@@ -11,6 +13,8 @@ import { SendRunService } from 'src/app/services/send-run.service';
   styleUrls: ['./send-run.component.scss']
 })
 export class SendRunComponent {
+
+  public categories!: Category[];
 
   form = new FormGroup({
     videoUrl: new FormControl(null, Validators.required),
@@ -21,7 +25,13 @@ export class SendRunComponent {
     categoryId: new FormControl(null, Validators.required)
   })
 
-  constructor(private _sendRunService: SendRunService, private _router: Router) { }
+  constructor(private _sendRunService: SendRunService, private _categoryService: CategoryService, private _router: Router) {
+    this._categoryService.getAllCategories().pipe(take(1)).subscribe({
+      next: d => {
+        this.categories = d;
+      }
+    })
+  }
 
   sendRun(): void {
     if (!this.form.valid) return;

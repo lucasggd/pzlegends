@@ -12,6 +12,7 @@ import { AuthGuard } from './admin/guard/auth.guard';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { RunRequestAdminComponent } from './admin/pages/run-request-admin/run-request-admin.component';
 import { AdminGuard } from './admin/guard/admin.guard';
+import { RunRequestByIdComponent } from './admin/pages/run-request-admin/run-request-by-id/run-request-by-id.component';
 
 const routes: Routes = [
   //
@@ -21,6 +22,7 @@ const routes: Routes = [
   //
 
   { path: 'admin/run-request', component: RunRequestAdminComponent, canActivate: [AdminGuard] },
+  { path: 'admin/run-request/:id', component: RunRequestByIdComponent, canActivate: [AdminGuard] },
 
   //
   //

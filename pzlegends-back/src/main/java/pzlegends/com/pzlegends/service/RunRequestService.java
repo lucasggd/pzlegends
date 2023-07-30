@@ -11,6 +11,9 @@ import pzlegends.com.pzlegends.model.dto.RunDTO;
 import pzlegends.com.pzlegends.model.enums.RunRequestStatusEnum;
 import pzlegends.com.pzlegends.repository.RunRequestRepository;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class RunRequestService {
 
@@ -23,7 +26,13 @@ public class RunRequestService {
     @Autowired
     private CategoryService categoryService;
 
+    public List<RunRequest> findAll(){
+        return runRequestRepository.findAll();
+    }
 
+    public Optional<RunRequest> findById(Long id) {
+        return runRequestRepository.findById(id);
+    }
     public RunRequest newRequest(RunDTO runRequest) throws Exception {
         var user = userService.findById(JwtTokenInterceptor.getUserId());
 

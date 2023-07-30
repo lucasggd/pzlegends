@@ -3,11 +3,7 @@ package pzlegends.com.pzlegends.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import pzlegends.com.pzlegends.model.RunRequest;
+import org.springframework.web.bind.annotation.*;
 import pzlegends.com.pzlegends.model.dto.RunDTO;
 import pzlegends.com.pzlegends.service.RunRequestService;
 
@@ -18,6 +14,15 @@ public class RunRequestController {
     @Autowired
     private RunRequestService runRequestService;
 
+    @GetMapping("")
+    private ResponseEntity<?> findAll() {
+        return new ResponseEntity<>(runRequestService.findAll(), HttpStatus.OK);
+    }
+
+    @GetMapping("{id}")
+    private ResponseEntity<?> findById(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(runRequestService.findById(id), HttpStatus.OK);
+    }
     @PostMapping("")
     private ResponseEntity<?> newRequest(@RequestBody RunDTO runRequest) throws Exception {
         return new ResponseEntity<>(runRequestService.newRequest(runRequest), HttpStatus.CREATED);
