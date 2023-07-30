@@ -1,4 +1,7 @@
-<navbar></navbar>
+<navbar *ngIf="userType != userTypeEnum.ADMIN"></navbar>
+
+<admin-navbar *ngIf="userType === userTypeEnum.ADMIN"></admin-navbar>
+
 <section class="h-full bg-gray-900 overflow-hidden">
   <router-outlet></router-outlet>
 </section>

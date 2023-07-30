@@ -2,10 +2,14 @@ package pzlegends.com.pzlegends.service;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import liquibase.exception.CustomChangeException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import pzlegends.com.pzlegends.config.ApiException;
 import pzlegends.com.pzlegends.model.User;
 import pzlegends.com.pzlegends.model.UserPassword;
+import pzlegends.com.pzlegends.model.enums.UserStatusEnum;
 import pzlegends.com.pzlegends.model.enums.UserTypeEnum;
 import pzlegends.com.pzlegends.repository.UserPasswordRepository;
 import pzlegends.com.pzlegends.repository.UserRepository;
@@ -31,6 +35,10 @@ public class AuthenticateService {
         Optional<UserPassword> user = this.repository.findByUserUsernameAndPassword(username, passwordToMD5(password));
 
         if (user.isEmpty()) return null;
+
+        if (user.get().getUser().getStatus().equals(UserStatusEnum.NOT_CONFIRMED)) throw new ApiException(HttpStatus.UNAUTHORIZED, "userNotConfirmed");
+        if (user.get().getUser().getStatus().equals(UserStatusEnum.BANNED)) throw new ApiException(HttpStatus.UNAUTHORIZED, "benned");
+        if (user.get().getUser().getStatus().equals(UserStatusEnum.DELETED)) throw new ApiException(HttpStatus.UNAUTHORIZED, "notFound");
 
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("t", generateToken(user.get().getId(), user.get().getUser().getUsername(), user.get().getUser().getUserType()));

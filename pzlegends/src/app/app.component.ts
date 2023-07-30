@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { UserService } from './services/user.service';
+import { UserTypeEnum } from './enum/userTypeEnum';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'pzlegends';
+  userType!: UserTypeEnum;
+
+  userTypeEnum = UserTypeEnum;
+
+  constructor(private _userService: UserService) {
+    this.userType = _userService.userType;
+  }
 }

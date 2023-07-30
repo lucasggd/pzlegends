@@ -21,6 +21,11 @@ export class UserService {
     localStorage.setItem('user', JSON.stringify(user))
   }
 
+  get userType(): any {
+    if (!this.user || !this.user.t) return;
+    return this.decodeJwt(this.user.t).userType;
+  }
+
   login(username: string, password: string): void {
     let login = new Login();
     login.password = password;

@@ -18,6 +18,9 @@ import { SendRunModule } from './pages/send-run/send-run.module';
 import { HomeModule } from './pages/home/home.module';
 import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
 import { UserProfileModule } from './pages/user-profile/user-profile.module';
+import { AdminNavbarModule } from './admin/layout/admin-navbar/admin-navbar.module';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,10 @@ import { UserProfileModule } from './pages/user-profile/user-profile.module';
     ReactiveFormsModule,
     MatDialogModule,
     NavbarModule,
-    HttpClientModule
+    HttpClientModule,
+    AdminNavbarModule,
+    MatSortModule,
+    MatTableModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
