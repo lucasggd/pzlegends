@@ -28,3 +28,19 @@
 .custom-modalbox>mat-dialog-container>div>div {
     background-color: transparent !important;
 }
+
+.mat-mdc-snack-bar-container {
+    &.errorMessage {
+        --mdc-snackbar-container-color: #c52c2c;
+        --mat-mdc-snack-bar-button-color: #fff;
+        --mdc-snackbar-supporting-text-color: #fff;
+    }
+
+    ;
+
+    &.successMessage {
+        --mdc-snackbar-container-color: #1f9729;
+        --mat-mdc-snack-bar-button-color: #fff;
+        --mdc-snackbar-supporting-text-color: #fff;
+    }
+}

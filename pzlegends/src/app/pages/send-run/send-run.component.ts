@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { take } from 'rxjs';
+import { MessageService } from 'src/app/abstract/message.service';
 import { Category } from 'src/app/model/category';
 import { SendRun } from 'src/app/model/send-run';
 import { CategoryService } from 'src/app/services/category.service';
@@ -25,7 +26,7 @@ export class SendRunComponent {
     categoryId: new FormControl(null, Validators.required)
   })
 
-  constructor(private _sendRunService: SendRunService, private _categoryService: CategoryService, private _router: Router) {
+  constructor(private _sendRunService: SendRunService, private _categoryService: CategoryService, private _router: Router, private _messageService: MessageService) {
     this._categoryService.getAllCategories().pipe(take(1)).subscribe({
       next: d => {
         this.categories = d;
@@ -46,8 +47,11 @@ export class SendRunComponent {
 
     this._sendRunService.sendRun(runRequest).pipe(take(1)).subscribe({
       next: d => {
-        console.log('success')
+        this._messageService.successMessage('Corrida enviada!')
         this._router.navigate(['home'])
+      },
+      error: err => {
+        this._messageService.errorMessage('Você já possui uma corrida pendente nesta categoria.')
       }
     })
   }

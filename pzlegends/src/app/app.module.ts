@@ -20,6 +20,8 @@ import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
 import { UserProfileModule } from './pages/user-profile/user-profile.module';
 import { AdminNavbarModule } from './admin/layout/admin-navbar/admin-navbar.module';
 import { RunRequestAdminModule } from './admin/pages/run-request-admin/run-request-admin.module';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { RunRequestAdminModule } from './admin/pages/run-request-admin/run-reque
     HomeModule,
     NavbarModule,
     UserProfileModule,
-    RunRequestAdminModule
+    RunRequestAdminModule,
+    MatSnackBarModule,
+    BrowserAnimationsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
