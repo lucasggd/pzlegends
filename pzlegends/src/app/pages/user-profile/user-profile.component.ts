@@ -20,7 +20,6 @@ export class UserProfileComponent {
 
     var reader = new FileReader();
     reader.readAsText(file);
-    console.log(reader)
   }
 
 }

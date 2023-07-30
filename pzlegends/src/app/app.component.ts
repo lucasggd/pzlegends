@@ -14,7 +14,6 @@ export class AppComponent {
   userTypeEnum = UserTypeEnum;
 
   constructor(private _userService: UserService) {
-    if (_userService.isTokenExpired()) _userService.user = new User();
     this.userType = _userService.userType;
   }
 }
