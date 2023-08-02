@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { take } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import { Login } from '../model/login';
 import { User } from '../model/user';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -32,6 +32,11 @@ export class UserService {
     login.username = username;
     this._http.post(`http://localhost:8080/authenticate`, login).pipe(take(1)).subscribe({
       next: (d: any) => {
+
+        if (d?.id) {
+          this._router.navigate(['email-confirmation/' + d.id])
+          return
+        }
 
         const token = this.decodeJwt(d.t);
 
@@ -77,5 +82,13 @@ export class UserService {
         .join("")
     );
     return JSON.parse(payload);
+  }
+
+  confirmEmail(id: number, code: number): Observable<any> {
+    let obj: any = {};
+    obj.userId = id;
+    obj.code = code;
+
+    return this._http.post(`http://localhost:8080/user/confirmation`, obj);
   }
 }

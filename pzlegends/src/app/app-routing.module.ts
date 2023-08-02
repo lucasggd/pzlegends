@@ -13,6 +13,7 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
 import { RunRequestAdminComponent } from './admin/pages/run-request-admin/run-request-admin.component';
 import { AdminGuard } from './admin/guard/admin.guard';
 import { RunRequestByIdComponent } from './admin/pages/run-request-admin/run-request-by-id/run-request-by-id.component';
+import { EmailConfirmationComponent } from './admin/email-confirmation/email-confirmation.component';
 
 const routes: Routes = [
   //
@@ -55,6 +56,7 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'email-confirmation/:id', component: EmailConfirmationComponent },
   { path: 'home', component: HomeComponent },
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: '**', pathMatch: 'full', redirectTo: 'home' },

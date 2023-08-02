@@ -22,6 +22,7 @@ import { AdminNavbarModule } from './admin/layout/admin-navbar/admin-navbar.modu
 import { RunRequestAdminModule } from './admin/pages/run-request-admin/run-request-admin.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EmailConfirmationModule } from './admin/email-confirmation/email-confirmation.module';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     UserProfileModule,
     RunRequestAdminModule,
     MatSnackBarModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    EmailConfirmationModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

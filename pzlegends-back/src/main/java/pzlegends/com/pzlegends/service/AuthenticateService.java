@@ -36,11 +36,16 @@ public class AuthenticateService {
 
         if (user.isEmpty()) return null;
 
-        if (user.get().getUser().getStatus().equals(UserStatusEnum.NOT_CONFIRMED)) throw new ApiException(HttpStatus.UNAUTHORIZED, "userNotConfirmed");
         if (user.get().getUser().getStatus().equals(UserStatusEnum.BANNED)) throw new ApiException(HttpStatus.UNAUTHORIZED, "benned");
         if (user.get().getUser().getStatus().equals(UserStatusEnum.DELETED)) throw new ApiException(HttpStatus.UNAUTHORIZED, "notFound");
 
         HashMap<String, String> hashMap = new HashMap<>();
+
+        if (user.get().getUser().getStatus().equals(UserStatusEnum.NOT_CONFIRMED)) {
+            hashMap.put("id", user.get().getUser().getId().toString());
+            return hashMap;
+        }
+
         hashMap.put("t", generateToken(user.get().getId(), user.get().getUser().getUsername(), user.get().getUser().getUserType()));
 
         return hashMap;

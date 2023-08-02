@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface UserConfirmationRepository extends JpaRepository<UserConfirmation, Long> {
 
-    Optional<UserConfirmation> findByUserUsername(String username);
+    Optional<UserConfirmation> findByUserId(Long userId);
 }

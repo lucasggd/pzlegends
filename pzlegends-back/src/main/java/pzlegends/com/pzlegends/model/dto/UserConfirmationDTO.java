@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 public class UserConfirmationDTO {
 
-    private String username;
+    private Long userId;
     private String code;
 
 }

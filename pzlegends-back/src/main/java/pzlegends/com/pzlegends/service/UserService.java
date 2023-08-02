@@ -113,9 +113,9 @@ public class UserService {
     }
 
     public User confirmEmail(UserConfirmationDTO userConfirmationDTO){
-        if (userConfirmationDTO.getUsername().isEmpty() || userConfirmationDTO.getCode().isEmpty()) throw new ApiException(HttpStatus.BAD_REQUEST, "badRequest");
+        if (userConfirmationDTO.getUserId() == null || userConfirmationDTO.getCode().isEmpty()) throw new ApiException(HttpStatus.BAD_REQUEST, "badRequest");
 
-        var x = userConfirmationRepository.findByUserUsername(userConfirmationDTO.getUsername());
+        var x = userConfirmationRepository.findByUserId(userConfirmationDTO.getUserId());
 
         if (x.isEmpty()) throw new ApiException(HttpStatus.BAD_REQUEST, "badRequest");
 
