@@ -97,8 +97,8 @@ public class UserService {
 
         message.setFrom("pzlegends@outlook.com");
         message.setTo(email);
-        message.setSubject("Confirmação de email: " + code);
-        message.setText("Seu código para confirmação de conta é: ");
+        message.setSubject("Confirmação de email conta Pzlegends");
+        message.setText("Seja bem-vindo ao Pzlegends, é uma honra ter você conosco. :) \n \nSeu código para confirmação de conta é: " + code);
 
         emailSender.send(message);
 

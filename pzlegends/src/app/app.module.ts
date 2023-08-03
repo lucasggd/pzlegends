@@ -23,6 +23,7 @@ import { RunRequestAdminModule } from './admin/pages/run-request-admin/run-reque
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EmailConfirmationModule } from './admin/email-confirmation/email-confirmation.module';
+import { RegisterModule } from './admin/register/register.module';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { EmailConfirmationModule } from './admin/email-confirmation/email-confir
     TopRunsByIdModule,
     ContactModule,
     LoginModule,
+    RegisterModule,
     SendRunModule,
     HomeModule,
     NavbarModule,

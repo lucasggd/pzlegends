@@ -53,6 +53,14 @@ export class UserService {
     })
   }
 
+  register(username: string, email: string, password: string): Observable<any> {
+    let register: any = {};
+    register.password = password;
+    register.username = username;
+    register.email = email;
+    return this._http.post(`http://localhost:8080/user/create-account`, register)
+  }
+
   logout(): void {
     localStorage.removeItem('user');
   }

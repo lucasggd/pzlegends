@@ -31,6 +31,7 @@ export class EmailConfirmationComponent {
   confirmEmail(): void {
     this._userService.confirmEmail(this._id, this.code.value).pipe(take(1)).subscribe({
       next: d => {
+        this.messageService.successMessage('Conta confirmada.')
         this._router.navigate(['login']);
       }, error: err => {
         this.code.setValue(null);
