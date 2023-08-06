@@ -18,7 +18,7 @@ export class RunRequestAdminComponent {
   constructor(private _runRequestService: RunRequestService) {
     _runRequestService.getData().pipe(take(1)).subscribe({
       next: d => {
-        this.data = d;
+        this.data = d.content;
       }
     })
   }

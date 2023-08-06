@@ -10,7 +10,7 @@ export class RunRequestService {
   constructor(private _http: HttpClient) { }
 
   getData(): Observable<any> {
-    return this._http.get<any>(`http://localhost:8080/admin/run/request`)
+    return this._http.get<any>(`http://localhost:8080/admin/run/request?page=0&limit=10`)
   }
 
   getById(id: number): Observable<any> {

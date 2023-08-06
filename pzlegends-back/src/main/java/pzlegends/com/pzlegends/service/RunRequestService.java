@@ -1,6 +1,9 @@
 package pzlegends.com.pzlegends.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import pzlegends.com.pzlegends.config.ApiException;
@@ -12,6 +15,7 @@ import pzlegends.com.pzlegends.model.dto.RunDTO;
 import pzlegends.com.pzlegends.model.enums.RunRequestStatusEnum;
 import pzlegends.com.pzlegends.repository.RunRequestRepository;
 
+import java.awt.print.Pageable;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -31,8 +35,8 @@ public class RunRequestService {
     @Autowired
     private RunService runService;
 
-    public List<RunRequest> findAll(){
-        return runRequestRepository.findAll();
+    public Page<RunRequest> findAll(Integer page, Integer limit){
+        return runRequestRepository.findAllByOrderByIdDesc(PageRequest.of(page, limit));
     }
 
     public Optional<RunRequest> findById(Long id) {
@@ -67,6 +71,10 @@ public class RunRequestService {
         run.get().setResponse_at(new Date());
 
         if (bool){
+            var oldRun = runService.findByUserIdAndCategoryId(run.get().getUser().getId(), run.get().getCategory().getId());
+
+            oldRun.ifPresent(value -> runService.deleteRun(value));
+
             run.get().setRunRequestStatus(RunRequestStatusEnum.APPROVED);
             runRequestRepository.save(run.get());
             runService.newRun(new Run(run.get()));

@@ -22,6 +22,14 @@ public class RunService {
         return runRepository.findById(id);
     }
 
+    public Optional<Run> findByUserIdAndCategoryId(Long userId, Long categoryId) {
+        return runRepository.findByUserIdAndCategoryId(userId, categoryId);
+    }
+
+    public void deleteRun(Run run) {
+        runRepository.delete(run);
+    }
+
     public Run newRun(Run run) {
         return runRepository.save(run);
     }

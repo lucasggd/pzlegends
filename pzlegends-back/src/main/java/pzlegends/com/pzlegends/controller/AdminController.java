@@ -1,5 +1,6 @@
 package pzlegends.com.pzlegends.controller;
 
+import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +18,8 @@ public class AdminController {
     private RunReportService runReportService;
 
     @GetMapping("/run/request")
-    private ResponseEntity<?> findAllRunRequest() {
-        return new ResponseEntity<>(runRequestService.findAll(), HttpStatus.OK);
+    private ResponseEntity<?> findAllRunRequest(@PathParam("page") Integer page, @PathParam("limit") Integer limit) {
+        return new ResponseEntity<>(runRequestService.findAll(page, limit), HttpStatus.OK);
     }
 
     @GetMapping("/run/report")
