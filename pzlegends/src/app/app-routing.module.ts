@@ -14,6 +14,7 @@ import { RunRequestAdminComponent } from './admin/pages/run-request-admin/run-re
 import { AdminGuard } from './admin/guard/admin.guard';
 import { RunRequestByIdComponent } from './admin/pages/run-request-admin/run-request-by-id/run-request-by-id.component';
 import { EmailConfirmationComponent } from './admin/email-confirmation/email-confirmation.component';
+import { ResetPasswordComponent } from './admin/reset-password/reset-password.component';
 
 const routes: Routes = [
   //
@@ -57,6 +58,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'email-confirmation/:id', component: EmailConfirmationComponent },
+  { path: 'reset/:email/:code', component: ResetPasswordComponent },
+  { path: 'reset', component: ResetPasswordComponent },
   { path: 'home', component: HomeComponent },
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: '**', pathMatch: 'full', redirectTo: 'home' },

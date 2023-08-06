@@ -8,10 +8,12 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pzlegends.com.pzlegends.config.ApiException;
+import pzlegends.com.pzlegends.model.ResetPassword;
 import pzlegends.com.pzlegends.model.User;
 import pzlegends.com.pzlegends.model.UserConfirmation;
 import pzlegends.com.pzlegends.model.UserPassword;
 import pzlegends.com.pzlegends.model.dto.CreateAccountDTO;
+import pzlegends.com.pzlegends.model.dto.ResetPasswordDTO;
 import pzlegends.com.pzlegends.model.dto.UserConfirmationDTO;
 import pzlegends.com.pzlegends.model.enums.UserStatusEnum;
 import pzlegends.com.pzlegends.repository.UserConfirmationRepository;
@@ -37,6 +39,9 @@ public class UserService {
     private UserConfirmationRepository userConfirmationRepository;
 
     @Autowired
+    private ResetPasswordService resetPasswordService;
+
+    @Autowired
     private JavaMailSender emailSender;
 
     public User findByUsername(String username) {
@@ -58,8 +63,10 @@ public class UserService {
         UserPassword userPassword = new UserPassword(user.getId(), encryptedPassword);
         userPasswordRepository.save(userPassword);
 
+        var code = getRandomNumberString() ;
+        String text = "Seja bem-vindo ao Pzlegends, é uma honra ter você conosco. :) \n \nSeu código para confirmação de conta é: " + code;
 
-        var code = sendEmailConfirmation(user.getEmail());
+        sendEmailConfirmation(user.getEmail(), "Confirmação de email conta Pzlegends", text);
 
         userConfirmationRepository.save(new UserConfirmation(user, code));
 
@@ -89,20 +96,17 @@ public class UserService {
         return number.toString(16);
     }
 
-    private String sendEmailConfirmation(String email){
+    private void sendEmailConfirmation(String email, String subject, String text){
 
         SimpleMailMessage message = new SimpleMailMessage();
 
-        var code = getRandomNumberString();
-
         message.setFrom("pzlegends@outlook.com");
         message.setTo(email);
-        message.setSubject("Confirmação de email conta Pzlegends");
-        message.setText("Seja bem-vindo ao Pzlegends, é uma honra ter você conosco. :) \n \nSeu código para confirmação de conta é: " + code);
+        message.setSubject(subject);
+        message.setText(text);
 
         emailSender.send(message);
 
-        return code;
     }
 
     private static String getRandomNumberString() {
@@ -137,6 +141,40 @@ public class UserService {
 
         userRepository.save(x.get().getUser());
         userConfirmationRepository.delete(x.get());
+
+        return null;
+    }
+
+    public User sendResetPassword(String email) {
+        var user = userRepository.findByEmail(email);
+
+        if (user.isEmpty()) return null;
+
+        var code = getRandomNumberString() ;
+
+        resetPasswordService.save(new ResetPassword(email, code));
+
+        String text = "\n \nPara redefinir sua senha acesse: https://pzlegends.com/reset/" + email + "/" + code;
+
+        sendEmailConfirmation(user.get().getEmail(), "Redefinir senha conta Pzlegends", text);
+
+        return null;
+    }
+
+    public User resetPassword(ResetPasswordDTO resetPasswordDTO) {
+        if (resetPasswordDTO.getEmail().isEmpty() || resetPasswordDTO.getCode().isEmpty() || resetPasswordDTO.getPassword().isEmpty()) throw new ApiException(HttpStatus.CONFLICT, "");
+
+        var resetPassword = resetPasswordService.findByEmailAndCode(resetPasswordDTO.getEmail(), resetPasswordDTO.getCode());
+
+        if (resetPassword.isEmpty()) throw new ApiException(HttpStatus.CONFLICT, "");
+
+        var user = userRepository.findByEmail(resetPasswordDTO.getEmail());
+
+        var userPassword = userPasswordRepository.findByUserId(user.get().getId());
+        userPassword.get().setPassword(genPassword(resetPasswordDTO.getPassword()));
+
+        userPasswordRepository.save(userPassword.get());
+        resetPasswordService.deleteReset(resetPassword.get());
 
         return null;
     }

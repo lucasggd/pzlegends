@@ -25,6 +25,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EmailConfirmationModule } from './admin/email-confirmation/email-confirmation.module';
 import { RegisterModule } from './admin/register/register.module';
 import { TranslocoRootModule } from './transloco-root.module';
+import { ResetPasswordModule } from './admin/reset-password/reset-password.module';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { TranslocoRootModule } from './transloco-root.module';
     MatSnackBarModule,
     BrowserAnimationsModule,
     EmailConfirmationModule,
-    TranslocoRootModule
+    TranslocoRootModule,
+    ResetPasswordModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

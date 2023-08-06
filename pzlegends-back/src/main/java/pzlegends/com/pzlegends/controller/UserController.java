@@ -5,10 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pzlegends.com.pzlegends.model.User;
-import pzlegends.com.pzlegends.model.dto.CreateAccountDTO;
-import pzlegends.com.pzlegends.model.dto.RunReportDTO;
-import pzlegends.com.pzlegends.model.dto.UserConfirmationDTO;
-import pzlegends.com.pzlegends.model.dto.UserDTO;
+import pzlegends.com.pzlegends.model.dto.*;
 import pzlegends.com.pzlegends.service.UserService;
 
 @RestController
@@ -26,6 +23,16 @@ public class UserController {
     @PostMapping("confirmation")
     private ResponseEntity<?> confirmEmail(@RequestBody UserConfirmationDTO userConfirmationDTO) throws Exception {
         return new ResponseEntity<>(userService.confirmEmail(userConfirmationDTO), HttpStatus.CREATED);
+    }
+
+    @PostMapping("send/reset")
+    private ResponseEntity<?> sendResetPassword(@RequestBody String email) throws Exception {
+        return new ResponseEntity<>(userService.sendResetPassword(email), HttpStatus.OK);
+    }
+
+    @PostMapping("reset")
+    private ResponseEntity<?> resetPassword(@RequestBody ResetPasswordDTO resetPasswordDTO) throws Exception {
+        return new ResponseEntity<>(userService.resetPassword(resetPasswordDTO), HttpStatus.OK);
     }
 
 }

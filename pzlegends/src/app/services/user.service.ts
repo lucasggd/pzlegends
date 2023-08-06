@@ -65,6 +65,18 @@ export class UserService {
     return this._http.post(`http://localhost:8080/user/create-account`, register)
   }
 
+  resetPassword(email: string, password: string, code: string): Observable<any> {
+    let reset: any = {};
+    reset.email = email;
+    reset.code = code;
+    reset.password = password;
+    return this._http.post(`http://localhost:8080/user/reset`, reset)
+  }
+
+  sendResetPassword(email: string): Observable<any> {
+    return this._http.post(`http://localhost:8080/user/send/reset`, email)
+  }
+
   logout(): void {
     localStorage.removeItem('user');
   }
