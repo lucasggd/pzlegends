@@ -46,7 +46,7 @@ public class AuthenticateService {
             return hashMap;
         }
 
-        hashMap.put("t", generateToken(user.get().getId(), user.get().getUser().getUsername(), user.get().getUser().getUserType()));
+        hashMap.put("t", generateToken(user.get().getUser().getId(), user.get().getUser().getUsername(), user.get().getUser().getUserType()));
 
         return hashMap;
 

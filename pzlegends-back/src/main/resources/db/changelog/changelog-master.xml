@@ -281,4 +281,10 @@
 
     </changeSet>
 
+    <changeSet id="08" author="lucas.dias">
+        <addColumn tableName="run_request">
+            <column name="message" type="varchar(200)"/>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>

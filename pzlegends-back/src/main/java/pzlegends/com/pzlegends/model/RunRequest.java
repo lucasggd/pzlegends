@@ -47,6 +47,9 @@ public class RunRequest {
     @Column(name = "status", nullable = false)
     private RunRequestStatusEnum runRequestStatus;
 
+    @Column(name = "message")
+    private String message;
+
     @ManyToOne
     @JoinColumn(name = "response_by")
     private User response_by;

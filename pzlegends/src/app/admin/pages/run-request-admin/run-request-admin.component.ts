@@ -2,7 +2,6 @@ import { Component } from "@angular/core";
 import { RunRequestService } from "../../services/run-request.service";
 import { take } from "rxjs";
 import { RunRequestStatusEnum } from "src/app/enum/runRequestStatusEnum";
-
 @Component({
   selector: 'app-run-request-admin',
   templateUrl: './run-request-admin.component.html',
@@ -23,10 +22,5 @@ export class RunRequestAdminComponent {
     })
   }
 
-  ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-
-  }
 }
 

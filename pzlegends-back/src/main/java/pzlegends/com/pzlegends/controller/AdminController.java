@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pzlegends.com.pzlegends.model.dto.RequestResponseDTO;
 import pzlegends.com.pzlegends.service.RunReportService;
 import pzlegends.com.pzlegends.service.RunRequestService;
 
@@ -32,7 +33,7 @@ public class AdminController {
         return new ResponseEntity<>(runRequestService.findById(id), HttpStatus.OK);
     }
     @PostMapping("/run/request/{id}/response")
-    private ResponseEntity<?> newRequest(@PathVariable("id") Long id, @RequestBody boolean bool) throws Exception {
-        return new ResponseEntity<>(runRequestService.response(id, bool), HttpStatus.CREATED);
+    private ResponseEntity<?> newRequest(@PathVariable("id") Long id, @RequestBody RequestResponseDTO requestResponseDTO) throws Exception {
+        return new ResponseEntity<>(runRequestService.response(id, requestResponseDTO), HttpStatus.CREATED);
     }
 }

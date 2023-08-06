@@ -51,6 +51,7 @@ export class TopRunsByIdComponent {
       panelClass: 'custom-modalbox',
       data: { runId: this._id }
     });
+
   }
 
 }
