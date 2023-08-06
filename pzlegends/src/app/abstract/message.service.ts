@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslocoService } from "@ngneat/transloco";
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessageService {
 
-  constructor(private _snackBar: MatSnackBar) { }
+  constructor(private _snackBar: MatSnackBar, private _transloco: TranslocoService) { }
 
   successMessage(message: string) {
     this._snackBar.open(message, '', { duration: 5000, panelClass: ['successMessage'] });
   }
 
-  errorMessage(message: string) {
-    this._snackBar.open(message, 'x', { panelClass: ['errorMessage'] });
+  errorMessage(error: any) {
+    if (error.error.message!) error = this._transloco.translate(error.error.message);
+    this._snackBar.open(error, 'x', { panelClass: ['errorMessage'] });
   }
 }

@@ -1,0 +1,5 @@
+{
+    "userOrPasswordInvalid": "Invalid User/Password",
+    "emailAlreadyExist": "Email Already Exist.",
+    "usernameAlreadyExist": "Username Already Exist."
+}

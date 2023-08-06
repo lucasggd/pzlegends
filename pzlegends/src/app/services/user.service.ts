@@ -5,13 +5,14 @@ import { Login } from '../model/login';
 import { User } from '../model/user';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
+import { MessageService } from '../abstract/message.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  constructor(private _router: Router, private _http: HttpClient, private jwtHelper: JwtHelperService) { }
+  constructor(private _router: Router, private _http: HttpClient, private jwtHelper: JwtHelperService, private _messageService: MessageService) { }
 
   get user(): User {
     return JSON.parse(localStorage.getItem('user')!);
@@ -49,6 +50,9 @@ export class UserService {
         this.user = user;
 
         window.location.reload();
+      },
+      error: err => {
+        this._messageService.errorMessage(err);
       }
     })
   }

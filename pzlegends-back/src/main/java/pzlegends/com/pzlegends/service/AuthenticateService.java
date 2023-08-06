@@ -30,11 +30,11 @@ public class AuthenticateService {
     private UserPasswordRepository repository;
 
     public HashMap<String, String> authenticate(String username, String password) {
-        if (username == null || password == null) return null;
+        if (username == null || password == null) throw new ApiException(HttpStatus.UNAUTHORIZED, "userOrPasswordInvalid");
 
         Optional<UserPassword> user = this.repository.findByUserUsernameAndPassword(username, passwordToMD5(password));
 
-        if (user.isEmpty()) return null;
+        if (user.isEmpty()) throw new ApiException(HttpStatus.UNAUTHORIZED, "userOrPasswordInvalid");
 
         if (user.get().getUser().getStatus().equals(UserStatusEnum.BANNED)) throw new ApiException(HttpStatus.UNAUTHORIZED, "benned");
         if (user.get().getUser().getStatus().equals(UserStatusEnum.DELETED)) throw new ApiException(HttpStatus.UNAUTHORIZED, "notFound");

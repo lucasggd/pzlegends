@@ -24,6 +24,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EmailConfirmationModule } from './admin/email-confirmation/email-confirmation.module';
 import { RegisterModule } from './admin/register/register.module';
+import { TranslocoRootModule } from './transloco-root.module';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { RegisterModule } from './admin/register/register.module';
     RunRequestAdminModule,
     MatSnackBarModule,
     BrowserAnimationsModule,
-    EmailConfirmationModule
+    EmailConfirmationModule,
+    TranslocoRootModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

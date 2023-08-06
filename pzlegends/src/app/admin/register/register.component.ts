@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { take } from 'rxjs';
 import { UserService } from 'src/app/services/user.service';
+import { TranslocoService } from "@ngneat/transloco";
 
 @Component({
   selector: 'app-register',
@@ -14,13 +15,13 @@ export class RegisterComponent {
   error!: string;
 
   public form = new FormGroup({
-    username: new FormControl(null, Validators.required),
-    email: new FormControl(null, Validators.required),
-    password: new FormControl(null, Validators.required),
+    username: new FormControl(null, [Validators.required, Validators.maxLength(20)]),
+    email: new FormControl(null, [Validators.required, Validators.email]),
+    password: new FormControl(null, [Validators.required, Validators.minLength(5)]),
     repeatPassword: new FormControl(null, Validators.required),
   })
 
-  constructor(private _userService: UserService, private _router: Router) {
+  constructor(private _userService: UserService, private _router: Router, private _transloco: TranslocoService) {
 
   }
 
@@ -33,6 +34,18 @@ export class RegisterComponent {
 
     if (this.form.get(controlName)?.hasError('max')) {
       return 'Valor maximo é ' + this.form.get(controlName)?.getError('max')?.max;
+    }
+
+    if (this.form.get(controlName)?.hasError('minlength')) {
+      return 'Tamanho minimo é ' + this.form.get(controlName)?.getError('minlength')?.requiredLength + " caracteres";
+    }
+
+    if (this.form.get(controlName)?.hasError('maxlength')) {
+      return 'Tamanho maximo é ' + this.form.get(controlName)?.getError('maxlength')?.requiredLength + " caracteres";
+    }
+
+    if (this.form.get(controlName)?.hasError('email')) {
+      return 'Email inválido*';
     }
 
     return this.form.get(controlName)?.hasError('required') ? 'Campo obrigatório*' : '';
@@ -51,7 +64,7 @@ export class RegisterComponent {
         this._router.navigate(['email-confirmation/' + d?.id])
       },
       error: err => {
-        this.error = err.error.message;
+        this.error = this._transloco.translate(err.error.message);
       }
     })
   }

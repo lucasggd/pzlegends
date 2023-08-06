@@ -14,6 +14,8 @@ export class TopRunsComponent {
 
   private _id!: number;
 
+  public loading: boolean = true;
+
   public top3Players: any[] = []
 
   public topPlayers: any[] = []
@@ -29,6 +31,7 @@ export class TopRunsComponent {
   }
 
   getRuns(): void {
+    this.loading = true;
     this.top3Players = [];
     this.topPlayers = [];
 
@@ -43,6 +46,7 @@ export class TopRunsComponent {
         }
 
         this.topPlayers = data.slice(3);
+        this.loading = false;
       }
     })
   }
