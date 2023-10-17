@@ -26,6 +26,7 @@ import { EmailConfirmationModule } from './admin/email-confirmation/email-confir
 import { RegisterModule } from './admin/register/register.module';
 import { TranslocoRootModule } from './transloco-root.module';
 import { ResetPasswordModule } from './admin/reset-password/reset-password.module';
+import { MessageService } from './abstract/message.service';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,7 @@ import { ResetPasswordModule } from './admin/reset-password/reset-password.modul
     BrowserAnimationsModule,
     EmailConfirmationModule,
     TranslocoRootModule,
-    ResetPasswordModule
+    ResetPasswordModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

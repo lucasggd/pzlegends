@@ -14,6 +14,8 @@ export class MessageService {
   }
 
   errorMessage(error: any) {
+    this._transloco.selectTranslate('pt-BR')
+    console.log(this._transloco.translate('teste'))
     if (error.error.message!) error = this._transloco.translate(error.error.message);
     this._snackBar.open(error, 'x', { panelClass: ['errorMessage'] });
   }
